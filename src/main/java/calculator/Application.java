@@ -37,5 +37,7 @@ public class Application {
         } else {
             throw new IllegalArgumentException();
         }
+
+        System.out.println("결과 : " + sum);
     }
 }
