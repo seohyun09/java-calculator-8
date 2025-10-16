@@ -17,6 +17,10 @@ public class Application {
                 separator.append(input.charAt(i));
                 i++;
             }
+            // '\n'이 존재하지 않아 커스텀 구분자를 정하지 못하는 경우
+            if (i >= input.length()) {
+                throw new IllegalArgumentException();
+            }
             String numbers = input.substring(i + 1);
             String[] tokens = numbers.split(Pattern.quote(separator.toString()));
             for (String token : tokens) {
