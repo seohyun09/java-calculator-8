@@ -7,6 +7,8 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
+        int sum = 0;
+
         // 입력값 검증
         if (input.startsWith("//")) {
             int i = 2;
@@ -15,6 +17,16 @@ public class Application {
                 separator.append(input.charAt(i));
                 i++;
             }
+        } else if (Character.isDigit(input.charAt(0))) {
+            String[] tokens = input.split(",|;");
+            for (String token : tokens) {
+                if (Integer.parseInt(token) < 0) {
+                    throw new IllegalArgumentException();
+                }
+                sum += Integer.parseInt(token);
+            }
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 }
