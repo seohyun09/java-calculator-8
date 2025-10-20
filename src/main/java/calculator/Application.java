@@ -11,18 +11,16 @@ public class Application {
         int sum = 0;
 
         if (input.startsWith("//")) {
-            int i = 2;
-            StringBuilder separator = new StringBuilder();
-            while (i < input.length() && input.charAt(i) != '\n') {
-                separator.append(input.charAt(i));
-                i++;
-            }
-            // '\n'이 존재하지 않아 커스텀 구분자를 정하지 못하는 경우
-            if (i >= input.length()) {
+            String[] parts = input.split("\\\\n", 2);
+
+            if (parts.length < 2) {
                 throw new IllegalArgumentException();
             }
-            String numbers = input.substring(i + 1);
-            String[] tokens = numbers.split(Pattern.quote(separator.toString()));
+
+            String separator = parts[0].substring(2);
+            String numbers = parts[1];
+
+            String[] tokens = numbers.split(Pattern.quote(separator));
             for (String token : tokens) {
                 int num = Integer.parseInt(token);
                 if (num < 0) {
@@ -30,6 +28,7 @@ public class Application {
                 }
                 sum += num;
             }
+
         } else if (Character.isDigit(input.charAt(0))) {
             String[] tokens = input.split(",|;");
             for (String token : tokens) {
